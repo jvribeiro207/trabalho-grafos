@@ -1,0 +1,13 @@
+# Ignorar executáveis
+programa
+*.exe
+*.out
+*.o
+
+# Ignorar arquivos de sistema/IDE
+.vscode/
+.DS_Store
+
+# Opcional: Ignorar as visualizações e resultados para não poluir
+*.txt
+*.csv
