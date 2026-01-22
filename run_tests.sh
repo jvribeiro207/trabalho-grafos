@@ -8,7 +8,7 @@ P=1
 Q=0
 ITERACOES=10
 
-g++ main.cpp Grafo.cpp Guloso.cpp -o trabalho_grafos -O3
+g++ main.cpp Grafo.cpp Guloso.cpp -o run -O3
 
 echo -e "\n\033[1;32mIniciando bateria de testes...\033[m"
 rm -f resultados.csv 
@@ -19,7 +19,7 @@ do
     for ((i=1; i<=ITERACOES; i++))
     do
 
-        ./trabalho_grafos $INSTANCIA $P $Q
+        ./run $INSTANCIA $P $Q
         sleep 1
     done
 done
