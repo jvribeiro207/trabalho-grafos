@@ -26,9 +26,6 @@ bool Guloso::corValida(int u, int c, const vector<int>& coresAtuais) {
 }
 
 Solucao Guloso::construirSolucao(float alpha, unsigned int seed) {
-    // Configura semente local para esta construção (importante para reprodutibilidade interna)
-    // Mas normalmente o srand é chamado fora. Aqui garantimos variação se for loop.
-    // Para simplificar, assumimos que srand já foi chamado corretamente no loop principal.
     
     int n = grafo.getNumVertices();
     Solucao sol;
@@ -130,17 +127,15 @@ Solucao Guloso::resolverRandomizado(float alpha, int iteracoes, unsigned int see
     auto inicioTotal = chrono::high_resolution_clock::now();
     
     Solucao melhorSol;
-    melhorSol.maxCor = 1e9; // Infinito
+    melhorSol.maxCor = 1e9;
 
-    // O loop externo no main controla a semente global. 
-    // Aqui assumimos que rand() gerará valores diferentes a cada chamada.
     
     for (int i = 0; i < iteracoes; i++) {
         Solucao atual = construirSolucao(alpha, seed);
         
         if (atual.maxCor < melhorSol.maxCor) {
             melhorSol = atual;
-            melhorSol.semente = seed; // Registra a semente (simbólico se não reiniciar srand)
+            melhorSol.semente = seed; 
         }
     }
     
@@ -161,7 +156,6 @@ Solucao Guloso::resolverReativo(int iteracoes, int tamanhoBloco, vector<float> a
     Solucao melhorGlobal;
     melhorGlobal.maxCor = 1e9;
 
-    // Melhor solução conhecida para normalização (pode ser atualizada dinamicamente)
     int melhorConhecido = 1e9; 
 
     for (int iter = 0; iter < iteracoes; iter++) {
@@ -207,7 +201,6 @@ Solucao Guloso::resolverReativo(int iteracoes, int tamanhoBloco, vector<float> a
                     // Q = MelhorGlobal / Media.
                     qualidades[i] = (double)melhorConhecido / media;
                 } else {
-                    // Se não foi usado, mantém probabilidade ou reduz? 
                     // Estratégia simples: qualidade média atual.
                     qualidades[i] = 0.01; // Valor baixo para penalizar não uso
                 }
@@ -217,7 +210,6 @@ Solucao Guloso::resolverReativo(int iteracoes, int tamanhoBloco, vector<float> a
             // Recalcula probabilidades
             for (int i = 0; i < m; i++) {
                 probabilidades[i] = qualidades[i] / somaQ;
-                // Opcional: impor probabilidade mínima para não zerar totalmente
             }
         }
     }
@@ -232,9 +224,6 @@ void Guloso::salvarEstatisticas(string arquivoCsv, string nomeInstancia, string 
                                 string params, Solucao sol) {
     ofstream arquivo;
     arquivo.open(arquivoCsv, ios::app); // Append mode
-
-    // Cabeçalho deve ser criado manualmente na primeira vez ou fora daqui
-    // Formato sugerido: Data, Instancia, Algoritmo, Params, Semente, Tempo, MelhorSolucao
     
     // Pegando data atual
     time_t now = time(0);

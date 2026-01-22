@@ -13,7 +13,6 @@ class Grafo {
 private:
     int numVertices;
     int numArestas;
-    // Lista de Adjacência
     vector<vector<int>> adj; 
     bool direcionado;
 

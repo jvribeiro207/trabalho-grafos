@@ -1,7 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <string>
-#include <iomanip> // Para formatar o nome do arquivo (opcional)
+#include <iomanip> 
 #include "Grafo.h"
 #include "Guloso.h"
 
@@ -39,7 +39,7 @@ int main(int argc, char* argv[]) {
     
     solver.salvarEstatisticas(arquivoSaida, nomeArquivo, "Guloso", "-", solG);
     
-    // [NOVO] Salvar visualização do Guloso
+
     salvarSolucaoCSAcademy(g, solG.coloracao, "vis_guloso.txt"); // <--- CHAMADA AQUI
 
 
@@ -56,7 +56,6 @@ int main(int argc, char* argv[]) {
         cout << "Randomizado (a=" << alpha << "): Melhor Cor = " << solR.maxCor << endl;
         solver.salvarEstatisticas(arquivoSaida, nomeArquivo, "Randomizado", params, solR);
 
-        // [NOVO] Salvar visualização para cada alpha
         // Cria um nome de arquivo dinâmico, ex: vis_rand_0.300000.txt
         string nomeVis = "vis_rand_" + to_string(alpha) + ".txt";
         salvarSolucaoCSAcademy(g, solR.coloracao, nomeVis); // <--- CHAMADA AQUI
@@ -75,7 +74,7 @@ int main(int argc, char* argv[]) {
     cout << "Reativo: Melhor Cor = " << solReact.maxCor << endl;
     solver.salvarEstatisticas(arquivoSaida, nomeArquivo, "Reativo", paramsReact, solReact);
 
-    // [NOVO] Salvar visualização do Reativo
+
     salvarSolucaoCSAcademy(g, solReact.coloracao, "vis_reativo.txt"); // <--- CHAMADA AQUI
 
     cout << "Fim. Resultados salvos em " << arquivoSaida << endl;

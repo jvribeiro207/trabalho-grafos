@@ -109,7 +109,7 @@ void Grafo::imprimir() {
     }
 }
 
-// --- CORREÇÃO COMPLETA DA FUNÇÃO ---
+
 void salvarSolucaoCSAcademy(const Grafo& G, const std::vector<int>& cores, std::string nomeArquivo) {
     std::ofstream arquivo(nomeArquivo);
     
@@ -123,7 +123,7 @@ void salvarSolucaoCSAcademy(const Grafo& G, const std::vector<int>& cores, std::
     // Se começam em 0, mantenha u = 0.
     for (int u = 1; u <= G.getNumVertices(); u++) {
         
-        // CORREÇÃO: Usando o método público getVizinhos() em vez de listaAdj
+
         const std::vector<int>& vizinhos = G.getVizinhos(u);
 
         // Se o vértice não tem vizinhos, imprimimos ele sozinho
@@ -147,5 +147,4 @@ void salvarSolucaoCSAcademy(const Grafo& G, const std::vector<int>& cores, std::
     }
 
     arquivo.close();
-    // std::cout << "Visualizacao salva em: " << nomeArquivo << std::endl;
 }
